@@ -1,0 +1,14 @@
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\SUBD.exe.config
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\SUBD.exe
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\SUBD.pdb
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.csproj.AssemblyReference.cache
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.csproj.SuggestedBindingRedirects.cache
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.Form1.resources
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.Properties.Resources.resources
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.csproj.GenerateResource.cache
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.csproj.CoreCompileInputs.cache
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.exe
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.pdb
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.DatabaseControlForm.resources
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.TableControlForm.resources
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.ColumnControlForm.resources

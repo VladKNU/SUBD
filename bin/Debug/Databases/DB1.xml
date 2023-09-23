@@ -1,0 +1,14 @@
+<DATABASE Name="DB1">
+  <TABLES>
+    <Table Name="T1">
+      <COLUMNS>
+        <Column Name="C1" Type="REAL" />
+        <Column Name="C2" Type="CHAR" />
+        <Column Name="C4" Type="REAL" />
+        <Column Name="C5" Type="CHAR" />
+        <Column Name="C6" Type="CHAR" />
+      </COLUMNS>
+      <ROWS />
+    </Table>
+  </TABLES>
+</DATABASE>
