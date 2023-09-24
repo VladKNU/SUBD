@@ -14,3 +14,12 @@ D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.TableControlForm.res
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.ColumnControlForm.resources
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.RowControlForm.resources
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.TableDiffControlForm.resources
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.abstractions.dll
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.assert.dll
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.core.dll
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.execution.desktop.dll
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.abstractions.xml
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.assert.xml
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.core.xml
+D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\xunit.execution.desktop.xml
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.csproj.CopyComplete
