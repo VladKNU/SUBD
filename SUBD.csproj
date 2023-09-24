@@ -89,6 +89,12 @@
     <Compile Include="TableControlForm.Designer.cs">
       <DependentUpon>TableControlForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="TableDiffControlForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="TableDiffControlForm.Designer.cs">
+      <DependentUpon>TableDiffControlForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TextFileColumn.cs" />
     <EmbeddedResource Include="ColumnControlForm.resx">
       <DependentUpon>ColumnControlForm.cs</DependentUpon>
@@ -113,6 +119,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="TableControlForm.resx">
       <DependentUpon>TableControlForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="TableDiffControlForm.resx">
+      <DependentUpon>TableDiffControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

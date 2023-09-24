@@ -619,5 +619,150 @@ namespace SUBD
         }
 
         #endregion
+
+        private void tableDifferenceToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TableDiffControlForm tableDiff = new TableDiffControlForm();
+            tableDiff.ShowDialog();
+
+            string tableName1 = tableDiff.tableName1;
+            string tableName2 = tableDiff.tableName2;
+
+            if(!String.IsNullOrEmpty(tableName1) && !String.IsNullOrEmpty(tableName2))
+            {                
+                XmlDocument xmlDoc = new XmlDocument();
+                xmlDoc.Load($"./Databases/{database.Name}.xml");
+
+                // Find the "ROWS" elements for the specified tables
+                var rows1Element = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{tableName1}']/ROWS");
+                var rows2Element = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{tableName2}']/ROWS");
+
+                if (rows1Element != null && rows2Element != null)
+                {
+                    // Split and store the rows of "T1" and "T2"
+                    var rows1 = rows1Element.ChildNodes.Cast<XmlNode>().Select(node => node.Attributes["Data"].Value).ToList();
+                    var rows2 = rows2Element.ChildNodes.Cast<XmlNode>().Select(node => node.Attributes["Data"].Value).ToList();
+
+                    List<Row> rows3 = rows1.Except(rows2).Select(rowData => new Row(rowData.Split('#').ToList())).ToList();
+
+                    if (rows3 != null && rows3.Count() > 0)
+                    {
+                        Table resultTable;
+
+                        if (tables.Where(t => t.Name == $"{tableName1}/{tableName2}").Count() > 0)
+                            resultTable = new Table($"{tableName1}/{tableName2}({DateTime.UtcNow})");
+                        else
+                            resultTable = new Table($"{tableName1}/{tableName2}");
+
+                        resultTable.Columns = columns[tables.First(t => t.Name == tableName1)];
+                        resultTable.Rows = rows3;
+
+                        tables.Add(resultTable);
+
+                        XmlElement newTable = xmlDoc.CreateElement("Table");
+                        newTable.SetAttribute("Name", $"{resultTable.Name}");
+
+                        XmlElement tablesElement = xmlDoc.SelectSingleNode("/DATABASE/TABLES") as XmlElement;
+
+                        tablesElement.AppendChild(newTable);
+
+                        newTable.AppendChild(xmlDoc.CreateElement("COLUMNS"));
+
+                        XmlElement newColumn;
+
+                        XmlNode columnsElement = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{resultTable.Name}']");
+
+                        XmlNode columnsNode = columnsElement.SelectSingleNode("COLUMNS");
+
+                        foreach (var column in resultTable.Columns)
+                        {
+                            newColumn = xmlDoc.CreateElement("Column");
+                            newColumn.SetAttribute("Name", column.Name);
+                            newColumn.SetAttribute("Type", column.Type);
+                            columnsNode.AppendChild(newColumn);
+                        }
+
+                        newTable.AppendChild(xmlDoc.CreateElement("ROWS"));
+
+                        XmlElement newRow;
+
+                        // Find the TABLES element
+                        XmlElement rawsElement = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{resultTable.Name}']/ROWS") as XmlElement;
+
+                        // Append the new Row element to the ROWS element
+                        foreach (var row in resultTable.Rows)
+                        {
+                            newRow = xmlDoc.CreateElement("Row");
+
+                            string _data = "";
+                            foreach (var item in row.Values)
+                            {
+                                if (String.IsNullOrEmpty(item))
+                                    _data += "null#";
+                                else
+                                    _data += $"{item}#";
+                            }
+
+                            newRow.SetAttribute("Data", _data);
+
+                            rawsElement.AppendChild(newRow);
+                        }
+                        xmlDoc.Save($"./Databases/{database.Name}.xml");
+
+                        OpenTable(resultTable);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Table_1/Table_2 == null");
+                    }
+                }
+
+                xmlDoc.Save($"./Databases/{database.Name}.xml");
+            }
+        }
+
+        private void OpenTable(Table resTable)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load($"./Databases/{database.Name}.xml");           
+
+            Table table = tables.First(t => t.Name == resTable.Name);
+            TabPage tabPage = new TabPage(resTable.Name);
+
+            DataGridView dataGridView = new DataGridView();
+
+            dataGridView.Dock = DockStyle.Fill;
+            dataGridView.ReadOnly = true;
+
+            if (resTable.Columns != null && resTable.Columns.Count > 0) {
+                if (!columns.ContainsKey(table))
+                    columns.Add(table, new List<Column>());
+
+                var ColumnsList = columns[table];
+
+                foreach (var item in resTable.Columns)
+                {                    
+                    if (!dataGridView.Columns.Contains(item.Name))
+                        dataGridView.Columns.Add(item.Name.Replace(' ', '_'), $"{item.Name} ({item.Type})");
+                }
+
+                columns[table] = resTable.Columns;
+            }            
+
+            if (!rows.ContainsKey(tables.First(t => t.Name == resTable.Name)))
+                rows.Add(tables.First(t => t.Name == resTable.Name), new List<Row>());
+
+            if (resTable.Rows != null && resTable.Rows.Count > 0)
+            {
+                foreach (var item in resTable.Rows)
+                {
+                    dataGridView.Rows.Add(item.Values.ToArray());
+                }
+            }
+
+            tabPage.Controls.Add(dataGridView);
+            TableTabControl.TabPages.Add(tabPage);
+            tabs.Add(table.Name, tabPage);
+        }
     }
 }

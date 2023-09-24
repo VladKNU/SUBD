@@ -145,15 +145,30 @@ namespace SUBD
                     panel1.Controls.Add(openFileButton); // Add the button to the Panel
                 }
 
-                textBox.TextChanged += (sender, e) =>
+                if (dataList[i].Type == "INT INTERVAL")
                 {
-                    if (!dataList.Where(c => c.Name == textBox.Name).First().Validate(textBox.Text))
+                    textBox.Leave += (sender, e) =>
                     {
-                        if (!String.IsNullOrEmpty(textBox.Text))
-                            MessageBox.Show("Invalid input. Please enter a valid value.");
-                        textBox.Text = null;
-                    }
-                };               
+                        if (!dataList.Where(c => c.Name == textBox.Name).First().Validate(textBox.Text))
+                        {
+                            if (!String.IsNullOrEmpty(textBox.Text))
+                                MessageBox.Show("Invalid input. Please enter a valid value.");
+                            textBox.Text = null;
+                        }
+                    };
+                }
+                else
+                {
+                    textBox.TextChanged += (sender, e) =>
+                    {
+                        if (!dataList.Where(c => c.Name == textBox.Name).First().Validate(textBox.Text))
+                        {
+                            if (!String.IsNullOrEmpty(textBox.Text))
+                                MessageBox.Show("Invalid input. Please enter a valid value.");
+                            textBox.Text = null;
+                        }
+                    };
+                }                               
 
                 // Add the Label and TextBox to the Panel
                 panel1.Controls.Add(label);

@@ -47,6 +47,7 @@
             this.OpenDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
             this.DatabaseNameLabel = new System.Windows.Forms.Label();
+            this.tableDifferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -54,7 +55,8 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.tableDifferenceToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(816, 28);
@@ -79,7 +81,7 @@
             this.DeleteDB,
             this.OpenDB});
             this.databaseToolStripMenuItem.Name = "databaseToolStripMenuItem";
-            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.databaseToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
             this.databaseToolStripMenuItem.Text = "Database";
             // 
             // CreateDB
@@ -109,7 +111,7 @@
             this.CreateTABLE,
             this.DeleteTABLE});
             this.tableToolStripMenuItem.Name = "tableToolStripMenuItem";
-            this.tableToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.tableToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
             this.tableToolStripMenuItem.Text = "Table";
             // 
             // CreateTABLE
@@ -132,7 +134,7 @@
             this.CreateCOL,
             this.DeleteCOL});
             this.columnToolStripMenuItem.Name = "columnToolStripMenuItem";
-            this.columnToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.columnToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
             this.columnToolStripMenuItem.Text = "Column";
             // 
             // CreateCOL
@@ -155,20 +157,20 @@
             this.CreateROW,
             this.DeleteROW});
             this.rowToolStripMenuItem.Name = "rowToolStripMenuItem";
-            this.rowToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.rowToolStripMenuItem.Size = new System.Drawing.Size(155, 26);
             this.rowToolStripMenuItem.Text = "Row";
             // 
             // CreateROW
             // 
             this.CreateROW.Name = "CreateROW";
-            this.CreateROW.Size = new System.Drawing.Size(224, 26);
+            this.CreateROW.Size = new System.Drawing.Size(136, 26);
             this.CreateROW.Text = "Create";
             this.CreateROW.Click += new System.EventHandler(this.CreateROW_Click);
             // 
             // DeleteROW
             // 
             this.DeleteROW.Name = "DeleteROW";
-            this.DeleteROW.Size = new System.Drawing.Size(224, 26);
+            this.DeleteROW.Size = new System.Drawing.Size(136, 26);
             this.DeleteROW.Text = "Delete";
             this.DeleteROW.Click += new System.EventHandler(this.DeleteROW_Click);
             // 
@@ -191,6 +193,13 @@
             this.DatabaseNameLabel.Name = "DatabaseNameLabel";
             this.DatabaseNameLabel.Size = new System.Drawing.Size(0, 16);
             this.DatabaseNameLabel.TabIndex = 1;
+            // 
+            // tableDifferenceToolStripMenuItem
+            // 
+            this.tableDifferenceToolStripMenuItem.Name = "tableDifferenceToolStripMenuItem";
+            this.tableDifferenceToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
+            this.tableDifferenceToolStripMenuItem.Text = "TableDifference";
+            this.tableDifferenceToolStripMenuItem.Click += new System.EventHandler(this.tableDifferenceToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -232,6 +241,7 @@
         private System.Windows.Forms.OpenFileDialog OpenDatabaseDialog;
         private System.Windows.Forms.SaveFileDialog SaveDatabaseDialog;
         private System.Windows.Forms.Label DatabaseNameLabel;
+        private System.Windows.Forms.ToolStripMenuItem tableDifferenceToolStripMenuItem;
     }
 }
 

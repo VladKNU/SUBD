@@ -23,8 +23,31 @@
     <Table Name="T3">
       <COLUMNS>
         <Column Name="C3" Type="CHAR" />
+        <Column Name="C1" Type="INT INTERVAL" />
       </COLUMNS>
-      <ROWS />
+      <ROWS>
+        <Row Data="null#2, 5#" />
+      </ROWS>
+    </Table>
+    <Table Name="T1/T2">
+      <COLUMNS>
+        <Column Name="C1" Type="INT" />
+        <Column Name="C2" Type="INT" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="213#null#" />
+        <Row Data="123#123#null#" />
+      </ROWS>
+    </Table>
+    <Table Name="T1/T2(24.09.2023 12:50:20)">
+      <COLUMNS>
+        <Column Name="C1" Type="INT" />
+        <Column Name="C2" Type="INT" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="213#null#" />
+        <Row Data="123#123#null#" />
+      </ROWS>
     </Table>
   </TABLES>
 </DATABASE>

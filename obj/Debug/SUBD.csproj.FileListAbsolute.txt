@@ -13,3 +13,4 @@ D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.DatabaseControlForm.
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.TableControlForm.resources
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.ColumnControlForm.resources
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.RowControlForm.resources
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.TableDiffControlForm.resources
