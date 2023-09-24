@@ -8,7 +8,7 @@ namespace SUBD
 {
     public class RealColumn : Column
     {
-        public new string Type { get; } = "REAL";
+        public override string Type { get; } = "REAL";
         public RealColumn(string name) : base(name) { }
 
         public override bool Validate(string value) => double.TryParse(value, out _);

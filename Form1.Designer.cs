@@ -43,7 +43,6 @@
             this.rowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateROW = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteROW = new System.Windows.Forms.ToolStripMenuItem();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TableTabControl = new System.Windows.Forms.TabControl();
             this.OpenDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
@@ -55,8 +54,7 @@
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.editToolStripMenuItem});
+            this.fileToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(816, 28);
@@ -174,12 +172,6 @@
             this.DeleteROW.Text = "Delete";
             this.DeleteROW.Click += new System.EventHandler(this.DeleteROW_Click);
             // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
             // TableTabControl
             // 
             this.TableTabControl.Location = new System.Drawing.Point(12, 51);
@@ -223,7 +215,6 @@
 
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem databaseToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem CreateDB;
         private System.Windows.Forms.ToolStripMenuItem DeleteDB;

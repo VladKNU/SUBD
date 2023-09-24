@@ -12,3 +12,4 @@ D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.pdb
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.DatabaseControlForm.resources
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.TableControlForm.resources
 D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.ColumnControlForm.resources
+D:\Subjects\Information Technology\SUBD\SUBD\obj\Debug\SUBD.RowControlForm.resources

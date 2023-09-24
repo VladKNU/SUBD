@@ -8,7 +8,7 @@ namespace SUBD
 {
     public class IntColumn : Column
     {
-        public new string Type { get; } = "INT";
+        public override string Type { get; } = "INT";
         public IntColumn(string name) : base(name) { }
 
         public override bool Validate(string value) => int.TryParse(value, out _);

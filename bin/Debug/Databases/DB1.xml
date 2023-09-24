@@ -2,11 +2,21 @@
   <TABLES>
     <Table Name="T1">
       <COLUMNS>
-        <Column Name="C1" Type="REAL" />
-        <Column Name="C2" Type="CHAR" />
-        <Column Name="C4" Type="REAL" />
-        <Column Name="C5" Type="CHAR" />
-        <Column Name="C6" Type="CHAR" />
+        <Column Name="ID" Type="INT" />
+        <Column Name="Name" Type="STRING" />
+        <Column Name="File" Type="TEXT FILE" />
+        <Column Name="Char" Type="CHAR" />
+        <Column Name="Real" Type="REAL" />
+        <Column Name="Int_1" Type="INT INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row ID="1" Data="1#null#null#null#null#null#" />
+        <Row ID="2" Data="null#asd#null#null#null#null#" />
+        <Row Data="123#asd#D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\New Text Document.txt#s#1,3#null#" />
+      </ROWS>
+    </Table>
+    <Table Name="T2">
+      <COLUMNS>
       </COLUMNS>
       <ROWS />
     </Table>

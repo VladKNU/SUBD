@@ -8,7 +8,7 @@ namespace SUBD
 {
     public class IntIntervalColumn : Column
     {
-        public new string Type { get; } = "INT INTERVAL";
+        public override string Type { get; } = "INT INTERVAL";
         public IntIntervalColumn(string name) : base(name) { }
 
         public override bool Validate(string value)

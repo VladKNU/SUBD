@@ -8,7 +8,7 @@ namespace SUBD
 {
     public class StringColumn : Column
     {
-        public new string Type { get; } = "STRING";
+        public override string Type { get; } = "STRING";
         public StringColumn(string name) : base(name) { }
 
         public override bool Validate(string value) => true;

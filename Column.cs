@@ -9,7 +9,7 @@ namespace SUBD
     public abstract class Column
     {
         public string Name { get; set; }
-        public string Type { get; } = "";
+        public abstract string Type { get; }
 
         public Column(string _name) => Name = _name;
 

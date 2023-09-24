@@ -107,7 +107,10 @@ namespace SUBD
         private void TablesComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (Form1.columnOption == "Delete")
+            {
+                ColumnsComboBox.Items.Clear();
                 ColumnsComboBox.Items.AddRange(Form1.columns[Form1.tables.First(t => t.Name == TablesComboBox.Text)].Select(c => c.Name).ToArray());
+            }
         }
 
         private void ColumnControlForm_FormClosing(object sender, FormClosingEventArgs e)

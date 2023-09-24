@@ -9,7 +9,7 @@ namespace SUBD
 {
     public class TextFileColumn : Column
     {
-        public new string Type { get; } = "TEXT FILE";
+        public override string Type { get; } = "TEXT FILE";
         public TextFileColumn(string name) : base(name) { }
 
         public override bool Validate(string value) => value.ToLower().EndsWith(".txt") && File.Exists(value);

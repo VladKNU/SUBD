@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace SUBD
@@ -25,6 +26,7 @@ namespace SUBD
 
         public static string tableOption = "";
         public static string columnOption = "";
+        public static string rowOption = "";
 
         public Form1()
         {
@@ -148,10 +150,48 @@ namespace SUBD
                     cols.Add(column.Attributes["Name"].Value, column.Attributes["Type"].Value);
                 }
 
+                if (!rows.ContainsKey(tables.First(t => t.Name == tableName)))
+                    rows.Add(tables.First(t => t.Name == tableName), new List<Row>());
+
+                var RowsList = rows[tables.First(t => t.Name == tableName)];
+
+                var rowsElement = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{element.Attributes.GetNamedItem("Name").Value}']/ROWS");
+
+                if (rowsElement != null)
+                {
+                    foreach (XmlNode row in rowsElement.ChildNodes)
+                    {
+                        if (row.Attributes["Data"] != null)                        
+                            RowsList.Add(new Row(row.Attributes["Data"].Value.Split('#').ToList()));                        
+                    }
+                }
+
                 CreateTableTab(element.Attributes.GetNamedItem("Name").Value, cols);
+
+                CreateRows(tableName, RowsList);
             }
 
             xmlDoc.Save($"./Databases/{name}.xml");
+        }
+
+        private void CreateRows(string tableName, List<Row> _rows)
+        {
+            Table table = tables.First(t => t.Name == tableName);
+
+            var dataGridView = (from control in (from tab in TableTabControl.TabPages.Cast<TabPage>()
+                                        where tab.Text == tableName
+                                        select tab).First().Controls.Cast<Control>()
+                        where control is DataGridView
+                        select control as DataGridView).First();
+
+            if (_rows != null && _rows.Count > 0)
+            {
+                foreach (var item in _rows)
+                {
+                    dataGridView.Rows.Add(item.Values.ToArray());
+                }                
+            }
+
         }
 
         #endregion
@@ -231,6 +271,7 @@ namespace SUBD
 
             if (!String.IsNullOrEmpty(tableForm.tableName))
             {
+                columns.Remove(tables.Where(t => t.Name == tableForm.tableName).First());
                 tables.Remove(tables.Where(t => t.Name == tableForm.tableName).First());
 
                 tabs.Remove(tableForm.tableName);
@@ -241,6 +282,7 @@ namespace SUBD
                 }
 
                 DeleteTable(tableForm.tableName);
+                TableTabControl.TabPages.Clear();
             }
         }
 
@@ -353,19 +395,13 @@ namespace SUBD
 
                 columns[tables.First(t => t.Name == columnForm.tableName)].Remove(col.First());
 
-                foreach (TabPage tab in TableTabControl.TabPages)
-                {
-                    if (tab.Text == columnForm.tableName)
-                    {
-                        foreach (var item in tab.Controls)
-                        {
-                            if(item is DataGridView)
-                            {
-                                ((DataGridView)item).Columns.Remove(((DataGridView)item).Columns[columnForm.columnName.Replace(' ', '_')]);
-                            }
-                        }
-                    }
-                }
+                var dataGridView = (from control in (from tab in TableTabControl.TabPages.Cast<TabPage>()
+                                       where tab.Text == columnForm.tableName
+                                       select tab).First().Controls.Cast<Control>()
+                           where control is DataGridView
+                           select control as DataGridView).First();
+
+                dataGridView.Columns.Remove(dataGridView.Columns[columnForm.columnName.Replace(' ', '_')]);
 
                 DeleteColumn(columnForm.columnName, columnForm.tableName);
             }
@@ -389,12 +425,73 @@ namespace SUBD
 
         private void CreateROW_Click(object sender, EventArgs e)
         {
+            rowOption = "Create";
 
+            RowControlForm rowForm = new RowControlForm();
+            rowForm.ShowDialog();
+
+            string str = "";
+            foreach (var item in rowForm.data)
+            {
+                if(!String.IsNullOrEmpty(item))
+                    str += "#" + item.ToString();
+            }
+
+            if (rowForm.data.Count() > 0 && !String.IsNullOrEmpty(str) && !String.IsNullOrEmpty(rowForm.tableName))
+            {
+                var dataGridView = (from control in (from tab in TableTabControl.TabPages.Cast<TabPage>()
+                                                     where tab.Text == rowForm.tableName
+                                                     select tab).First().Controls.Cast<Control>()
+                                    where control is DataGridView
+                                    select control as DataGridView).First();
+
+                if (!rows.ContainsKey(tables.First(t => t.Name == rowForm.tableName)))
+                    rows.Add(tables.First(t => t.Name == rowForm.tableName), new List<Row>());
+
+                var RowsList = rows[tables.First(t => t.Name == rowForm.tableName)];
+
+                RowsList.Add(new Row(rowForm.data));
+
+                CreateRow(rowForm.data, rowForm.tableName);
+                dataGridView.Rows.Add(rowForm.data.ToArray());
+            }            
+        }
+
+        private void CreateRow(List<string> data, string tableName)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load($"./Databases/{database.Name}.xml");
+
+            // Create a new Row element
+            XmlElement newRow = xmlDoc.CreateElement("Row");
+
+            string _data = "";
+            foreach (var item in data)
+            {
+                if(String.IsNullOrEmpty(item))
+                    _data += "null#";
+                else
+                    _data += $"{item}#";
+            }
+
+            newRow.SetAttribute("Data", _data);
+
+            // Find the TABLES element
+            XmlElement rawsElement = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{tableName}']/ROWS") as XmlElement;
+
+            // Append the new Row element to the ROWS element
+            rawsElement.AppendChild(newRow);
+
+            // Save the modified XML back to the file
+            xmlDoc.Save($"./Databases/{database.Name}.xml");
         }
 
         private void DeleteROW_Click(object sender, EventArgs e)
         {
-            //test
+            rowOption = "Delete";
+            RowControlForm rowForm = new RowControlForm();
+            rowForm.ShowDialog();
+
         }
 
         #endregion
