@@ -121,9 +121,22 @@ namespace SUBD
                 else
                 {
                     string path = OpenDatabaseDialog.FileName.Replace(".xml", "");
-                    database = new Database(path.Substring(path.LastIndexOf('\\') + 1));
-                    DatabaseNameLabel.Text = database.Name;
-                    OpenDatabase(database.Name);
+
+                    if(database == null)
+                    {
+                        database = new Database(path.Substring(path.LastIndexOf('\\') + 1));
+                        DatabaseNameLabel.Text = database.Name;
+                        OpenDatabase(database.Name);
+                    }
+                    else
+                    {
+                        if (database.Name != path.Substring(path.LastIndexOf('\\') + 1))
+                        {
+                            database = new Database(path.Substring(path.LastIndexOf('\\') + 1));
+                            DatabaseNameLabel.Text = database.Name;
+                            OpenDatabase(database.Name);
+                        }
+                    }
                 }
             }
         }
@@ -245,10 +258,9 @@ namespace SUBD
             DataGridView dataGridView = new DataGridView();
 
             dataGridView.Dock = DockStyle.Fill;
-            dataGridView.AllowUserToAddRows = true;
-            dataGridView.AllowUserToDeleteRows = true;
+            dataGridView.ReadOnly = true;
 
-            if(_columns != null)
+            if (_columns != null)
             {
                 foreach (var item in _columns)
                 {
@@ -282,7 +294,6 @@ namespace SUBD
                 }
 
                 DeleteTable(tableForm.tableName);
-                TableTabControl.TabPages.Clear();
             }
         }
 
@@ -393,17 +404,83 @@ namespace SUBD
                         where c.Key.Name == columnForm.tableName && c.Value.Where(co => co.Name == columnForm.columnName).Count() > 0
                         select c.Value.First();
 
-                columns[tables.First(t => t.Name == columnForm.tableName)].Remove(col.First());
+                // Find the table in columns
+                var tableColumns = columns.FirstOrDefault(t => t.Key.Name == columnForm.tableName);
 
                 var dataGridView = (from control in (from tab in TableTabControl.TabPages.Cast<TabPage>()
-                                       where tab.Text == columnForm.tableName
-                                       select tab).First().Controls.Cast<Control>()
-                           where control is DataGridView
-                           select control as DataGridView).First();
+                                                     where tab.Text == columnForm.tableName
+                                                     select tab).First().Controls.Cast<Control>()
+                                    where control is DataGridView
+                                    select control as DataGridView).First();
+
+                if (tableColumns.Key != null)
+                {
+                    // Find the column to remove
+                    var columnToRemove = col;
+
+                    if (columnToRemove != null)
+                    {
+                        // Get the index of the column before removing it
+                        int columnIndex = dataGridView.Columns.IndexOf(dataGridView.Columns[columnForm.columnName.Replace(' ', '_')]);
+
+                        if (rows.ContainsKey(tableColumns.Key))
+                        {
+                            // Check if the index is within valid bounds
+                            foreach (var item in rows[tableColumns.Key])
+                            {
+                                if (columnIndex >= 0 && columnIndex < item.Values.Count)
+                                {
+                                    DeleteRowFromRoot(tableColumns.Key.Name, rows[tableColumns.Key].IndexOf(item), columnIndex);
+
+                                    item.Values.RemoveAt(columnIndex);
+                                }
+                            }                            
+                        }
+
+                        // Remove the column
+                        tableColumns.Value.Remove(columnToRemove.First());
+
+                        // Now, columnIndex contains the index of the deleted column
+                    }
+                }
 
                 dataGridView.Columns.Remove(dataGridView.Columns[columnForm.columnName.Replace(' ', '_')]);
 
                 DeleteColumn(columnForm.columnName, columnForm.tableName);
+            }
+        }
+
+        private void DeleteRowFromRoot(string tableName, int rowIndex, int valueIndexToRemove)
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load($"./Databases/{database.Name}.xml");
+
+            // Find the specific "Row" element
+            XmlNode rowElement = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{tableName}']/ROWS/Row[{rowIndex + 1}]");
+
+            if (rowElement != null)
+            {
+                // Get the current "Data" attribute value
+                string dataAttributeValue = rowElement.Attributes["Data"].Value;
+
+                // Split the existing values by '#'
+                string[] values = dataAttributeValue.Split('#');
+
+                // Check if the index is within valid bounds
+                if (valueIndexToRemove >= 0 && valueIndexToRemove < values.Length)
+                {
+                    // Remove the value at the specified index
+                    values = values.Where((val, index) => index != valueIndexToRemove).ToArray();
+
+                    // Join the remaining values back into a string with '#' separator
+                    string newDataAttributeValue = string.Join("#", values);
+
+                    // Update the "Data" attribute with the new value
+                    rowElement.Attributes["Data"].Value = newDataAttributeValue;
+
+                    // Save the modified XML back to the file
+                    xmlDoc.Save($"./Databases/{database.Name}.xml");
+                }
             }
         }
 
@@ -491,7 +568,54 @@ namespace SUBD
             rowOption = "Delete";
             RowControlForm rowForm = new RowControlForm();
             rowForm.ShowDialog();
+            
+            if(rowForm.data.Count() > 0 && rowForm.index != -1)
+            {
+                var table = from r in rows
+                            where r.Key.Name == rowForm.tableName
+                            select r.Key;
 
+                var dataGridView = (from control in (from tab in TableTabControl.TabPages.Cast<TabPage>()
+                                                     where tab.Text == rowForm.tableName
+                                                     select tab).First().Controls.Cast<Control>()
+                                    where control is DataGridView
+                                    select control as DataGridView).First();
+
+                DeleteRow(rowForm.index, table.First().Name);
+
+                rows[table.First()].Remove(rows[table.First()][rowForm.index]);
+
+                dataGridView.Rows.Remove(dataGridView.Rows[rowForm.index]);
+            }
+        }
+
+        private void DeleteRow(int rowIndex, string tableName)
+        {
+            var table = from r in rows
+                        where r.Key.Name == tableName
+                        select r.Key;
+
+            XmlDocument xmlDoc = new XmlDocument();
+            xmlDoc.Load($"./Databases/{database.Name}.xml");
+
+            // Find the ROWS element for the specified table
+            XmlNode rowsElement = xmlDoc.SelectSingleNode($"/DATABASE/TABLES/Table[@Name='{tableName}']/ROWS");
+
+            if (rowsElement != null)
+            {
+                // Get the list of "Row" elements
+                XmlNodeList rowNodes = rowsElement.SelectNodes("Row");
+
+                if (rowIndex >= 0 && rowIndex < rowNodes.Count)
+                {
+                    // Remove the specified "Row" element by index
+                    XmlNode rowToRemove = rowNodes[rowIndex];
+                    rowsElement.RemoveChild(rowToRemove);
+
+                    // Save the modified XML back to the file
+                    xmlDoc.Save($"./Databases/{database.Name}.xml");
+                }
+            }
         }
 
         #endregion

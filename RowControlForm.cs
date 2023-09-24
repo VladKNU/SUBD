@@ -16,9 +16,14 @@ namespace SUBD
     {
         private List<Column> dataList = new List<Column>();
         private List<Table> tablesList = new List<Table>();
+        private bool isButtonClicled = false;
 
         public string tableName = "";
         public List<string> data = new List<string>();
+
+        public int index = -1;
+
+        ComboBox comboBox = new ComboBox();
 
         public RowControlForm()
         {
@@ -27,9 +32,64 @@ namespace SUBD
 
         private void RowControlForm_Load(object sender, EventArgs e)
         {
+            this.Size = new Size(304, 452);
             tablesList = Form1.tables;
             TablesComboBox.Items.Clear();
             TablesComboBox.Items.AddRange(tablesList.Select(t => t.Name).ToArray());
+
+            if (Form1.rowOption == "Delete")
+            {
+                this.Size = new Size(304, 511);
+
+                Label label = new Label();
+                label.Size = new Size(panel1.Width - 20, 16);
+                label.Text = $"Row";
+                label.Location = new Point(TablesComboBox.Location.X, TablesComboBox.Location.X + 35);
+
+                comboBox.Name = "RowsComboBox";
+                comboBox.Size = new Size(panel1.Width, 16);
+                comboBox.Location = new Point(TablesComboBox.Location.X, TablesComboBox.Location.X + 55);
+
+                comboBox.SelectedIndexChanged += (s, ee) =>
+                {
+                    if (!String.IsNullOrEmpty(comboBox.Text))
+                    {
+                        foreach (var control in panel1.Controls.Cast<Control>())
+                        {
+                            if (control is TextBox)
+                                control.Text = null;
+                        }
+
+                        List<string> values = comboBox.Text.Substring(comboBox.Text.IndexOf('|') + 2).Split('#').ToList();
+
+                        index = Convert.ToInt32(comboBox.Text.Substring(0, 1));
+
+                        for (int i = 0, j = 0; i < panel1.Controls.Count && j < values.Count; i++)
+                        {
+                            if (panel1.Controls[i] is TextBox)
+                            {
+                                if (values[j] != "null")
+                                {
+                                    panel1.Controls[i].Text = values[j];                                    
+                                }
+                                j++;
+                            }
+                        }
+                    }
+                };
+
+                this.Controls.Add(label);
+                this.Controls.Add(comboBox);
+
+                panel1.Location = new Point(panel1.Location.X, panel1.Location.Y + 60);
+                CreateButton.Visible = false;
+                DeleteButton.Location = new Point(CreateButton.Location.X, CreateButton.Location.Y + 60);
+            }
+
+            else
+            {                
+                DeleteButton.Visible = false;
+            }
         }
 
         private void CreateButton_Click(object sender, EventArgs e)
@@ -105,11 +165,12 @@ namespace SUBD
         {
             panel1.Controls.Clear();
             dataList.Clear();
+            comboBox.Items.Clear();
 
             var cols = from c in Form1.columns
                         where c.Key.Name == TablesComboBox.Text
-                        select c.Value;            
-
+                        select c.Value;
+       
             if (cols.Count() > 0)
             {
                 tableName = TablesComboBox.Text;
@@ -121,8 +182,41 @@ namespace SUBD
                     {
                         control.Enabled = false;
                     }
+
+                    var rows = from r in Form1.rows
+                               where r.Key.Name == TablesComboBox.Text
+                               select r.Value;
+
+                    if (rows.Count() > 0)
+                    {
+                        var values = rows.First().Select(r => r.Values).ToArray();
+
+                        if(values.Count() > 0)
+                        {
+                            data = values.First();
+
+                            for (int i = 0; i < values.Length; i++)
+                            {
+                                string output = $"{i} | {string.Join("#", values[i])}";
+                                comboBox.Items.Add(output);
+                            }
+                        }                        
+                    }
                 }
             }            
-        }        
+        }
+
+        private void DeleteButton_Click(object sender, EventArgs e)
+        {
+            isButtonClicled = true;
+            this.Close();
+        }
+
+        private void RowControlForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (isButtonClicled == false) {
+                index = -1;
+            }
+        }
     }
 }

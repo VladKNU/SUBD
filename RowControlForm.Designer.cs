@@ -33,6 +33,7 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.CreateButton = new System.Windows.Forms.Button();
             this.OpenFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.DeleteButton = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // TablesComboBox
@@ -71,17 +72,29 @@
             this.CreateButton.UseVisualStyleBackColor = true;
             this.CreateButton.Click += new System.EventHandler(this.CreateButton_Click);
             // 
+            // DeleteButton
+            // 
+            this.DeleteButton.Location = new System.Drawing.Point(12, 431);
+            this.DeleteButton.Name = "DeleteButton";
+            this.DeleteButton.Size = new System.Drawing.Size(361, 62);
+            this.DeleteButton.TabIndex = 21;
+            this.DeleteButton.Text = "Delete";
+            this.DeleteButton.UseVisualStyleBackColor = true;
+            this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+            // 
             // RowControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(389, 505);
+            this.ClientSize = new System.Drawing.Size(386, 505);
+            this.Controls.Add(this.DeleteButton);
             this.Controls.Add(this.CreateButton);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.TablesComboBox);
             this.Name = "RowControlForm";
             this.Text = "RowControlForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.RowControlForm_FormClosing);
             this.Load += new System.EventHandler(this.RowControlForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -94,5 +107,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button CreateButton;
         private System.Windows.Forms.OpenFileDialog OpenFileDialog;
+        private System.Windows.Forms.Button DeleteButton;
     }
 }
