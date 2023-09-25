@@ -31,8 +31,8 @@ namespace SUBD
                 "REAL",
                 "CHAR",
                 "STRING",
-                "TEXT FILE",
-                "INT INTERVAL"
+                "HTML FILE",
+                "STRING INTERVAL"
             };
 
             TypesComboBox.Items.AddRange(types.ToArray());

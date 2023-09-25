@@ -1,44 +1,36 @@
 <DATABASE Name="Database">
   <TABLES>
-    <Table Name="Table_1">
+    <Table Name="T1">
       <COLUMNS>
-        <Column Name="C1" Type="INT" />
-        <Column Name="C2" Type="REAL" />
-        <Column Name="C3" Type="CHAR" />
-        <Column Name="C4" Type="STRING" />
-        <Column Name="C5" Type="TEXT FILE" />
-        <Column Name="C6" Type="INT INTERVAL" />
+        <Column Name="C1" Type="HTML FILE" />
       </COLUMNS>
       <ROWS>
-        <Row Data="123#123,4#a#asd#D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\New Text Document.txt#2, 5#" />
-        <Row Data="1#2#3#4#null#3, 5#" />
+        <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#" />
+        <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#" />
       </ROWS>
     </Table>
-    <Table Name="Table_2">
+    <Table Name="T2">
       <COLUMNS>
-        <Column Name="C1" Type="INT" />
-        <Column Name="C2" Type="REAL" />
-        <Column Name="C3" Type="CHAR" />
-        <Column Name="C4" Type="STRING" />
-        <Column Name="C5" Type="TEXT FILE" />
-        <Column Name="C6" Type="INT INTERVAL" />
+        <Column Name="C1" Type="HTML FILE" />
       </COLUMNS>
       <ROWS>
-        <Row Data="123#123,4#a#asd#D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\New Text Document.txt#2, 5#" />
-        <Row Data="123#123#1#123#null#1, 4#" />
+        <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#" />
       </ROWS>
     </Table>
-    <Table Name="Table_1/Table_2">
+    <Table Name="T3">
       <COLUMNS>
-        <Column Name="C1" Type="INT" />
-        <Column Name="C2" Type="REAL" />
-        <Column Name="C3" Type="CHAR" />
-        <Column Name="C4" Type="STRING" />
-        <Column Name="C5" Type="TEXT FILE" />
-        <Column Name="C6" Type="INT INTERVAL" />
+        <Column Name="C1" Type="STRING INTERVAL" />
       </COLUMNS>
       <ROWS>
-        <Row Data="1#2#3#4#null#3, 5#null#" />
+        <Row Data="1, 4#" />
+      </ROWS>
+    </Table>
+    <Table Name="T1&amp;T2">
+      <COLUMNS>
+        <Column Name="C1" Type="HTML FILE" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#null#" />
       </ROWS>
     </Table>
   </TABLES>

@@ -364,11 +364,11 @@ namespace SUBD
                 case "STRING":
                     ColumnsList.Add(new StringColumn(name));
                     break;
-                case "TEXT FILE":
-                    ColumnsList.Add(new TextFileColumn(name));
+                case "HTML FILE":
+                    ColumnsList.Add(new HtmlFileColumn(name));
                     break;
-                case "INT INTERVAL":
-                    ColumnsList.Add(new IntIntervalColumn(name));
+                case "STRING INTERVAL":
+                    ColumnsList.Add(new StringIntervalColumn(name));
                     break;
             }
 
@@ -622,11 +622,11 @@ namespace SUBD
 
         private void tableDifferenceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            TableDiffControlForm tableDiff = new TableDiffControlForm();
-            tableDiff.ShowDialog();
+            TableCrossingControlForm tableCrossing = new TableCrossingControlForm();
+            tableCrossing.ShowDialog();
 
-            string tableName1 = tableDiff.tableName1;
-            string tableName2 = tableDiff.tableName2;
+            string tableName1 = tableCrossing.tableName1;
+            string tableName2 = tableCrossing.tableName2;
 
             if(!String.IsNullOrEmpty(tableName1) && !String.IsNullOrEmpty(tableName2))
             {                
@@ -643,16 +643,16 @@ namespace SUBD
                     var rows1 = rows1Element.ChildNodes.Cast<XmlNode>().Select(node => node.Attributes["Data"].Value).ToList();
                     var rows2 = rows2Element.ChildNodes.Cast<XmlNode>().Select(node => node.Attributes["Data"].Value).ToList();
 
-                    List<Row> rows3 = rows1.Except(rows2).Select(rowData => new Row(rowData.Split('#').ToList())).ToList();
+                    List<Row> rows3 = rows1.Intersect(rows2).Select(rowData => new Row(rowData.Split('#').ToList())).ToList();
 
                     if (rows3 != null && rows3.Count() > 0)
                     {
                         Table resultTable;
 
-                        if (tables.Where(t => t.Name == $"{tableName1}/{tableName2}").Count() > 0)
-                            resultTable = new Table($"{tableName1}/{tableName2}({DateTime.UtcNow})");
+                        if (tables.Where(t => t.Name == $"{tableName1}&{tableName2}").Count() > 0)
+                            resultTable = new Table($"{tableName1}&{tableName2}({DateTime.UtcNow})");
                         else
-                            resultTable = new Table($"{tableName1}/{tableName2}");
+                            resultTable = new Table($"{tableName1}&{tableName2}");
 
                         resultTable.Columns = columns[tables.First(t => t.Name == tableName1)];
                         resultTable.Rows = rows3;
@@ -713,7 +713,7 @@ namespace SUBD
                     }
                     else
                     {
-                        MessageBox.Show("Table_1/Table_2 == null");
+                        MessageBox.Show("Table_1&Table_2 == null");
                     }
                 }
 

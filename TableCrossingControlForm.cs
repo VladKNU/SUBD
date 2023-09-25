@@ -10,12 +10,12 @@ using System.Windows.Forms;
 
 namespace SUBD
 {
-    public partial class TableDiffControlForm : Form
+    public partial class TableCrossingControlForm : Form
     {
         public string tableName1 = "";
         public string tableName2 = "";
 
-        public TableDiffControlForm()
+        public TableCrossingControlForm()
         {
             InitializeComponent();
         }
@@ -43,7 +43,7 @@ namespace SUBD
                 this.Close();
         }
 
-        private void TableDiffControlForm_Load(object sender, EventArgs e)
+        private void TableCrossingControlForm_Load(object sender, EventArgs e)
         {
             comboBox1.Items.AddRange(Form1.tables.Select(t => t.Name).ToArray());
             comboBox2.Items.AddRange(Form1.tables.Select(t => t.Name).ToArray());

@@ -1,6 +1,6 @@
 ﻿namespace SUBD
 {
-    partial class TableDiffControlForm
+    partial class TableCrossingControlForm
     {
         /// <summary>
         /// Required designer variable.
@@ -79,7 +79,7 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "First Table";
             // 
-            // TableDiffControlForm
+            // TableCrossingControlForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -89,9 +89,9 @@
             this.Controls.Add(this.button1);
             this.Controls.Add(this.comboBox2);
             this.Controls.Add(this.comboBox1);
-            this.Name = "TableDiffControlForm";
-            this.Text = "TableDiffControlForm";
-            this.Load += new System.EventHandler(this.TableDiffControlForm_Load);
+            this.Name = "TableCrossingControlForm";
+            this.Text = "TableCrossingControlForm";
+            this.Load += new System.EventHandler(this.TableCrossingControlForm_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

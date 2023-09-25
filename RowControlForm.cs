@@ -124,7 +124,7 @@ namespace SUBD
                 textBox.Text = "";                
                 textBox.Location = new Point(0, 32 + i * 60); // Adjust the TextBox position as needed               
 
-                if (dataList[i].Type == "TEXT FILE")
+                if (dataList[i].Type == "HTML FILE")
                 {
                     textBox.ReadOnly = true;
 
@@ -135,7 +135,7 @@ namespace SUBD
                     openFileButton.Click += (sender, e) =>
                     {
                         OpenFileDialog openFileDialog = new OpenFileDialog();
-                        openFileDialog.Filter = "Text Files (*.txt)|*.txt";
+                        openFileDialog.Filter = "Html Files (*.html)|*.html";
                         if (openFileDialog.ShowDialog() == DialogResult.OK)
                         {
                             textBox.Text = openFileDialog.FileName;
@@ -145,7 +145,7 @@ namespace SUBD
                     panel1.Controls.Add(openFileButton); // Add the button to the Panel
                 }
 
-                if (dataList[i].Type == "INT INTERVAL")
+                if (dataList[i].Type == "STRING INTERVAL")
                 {
                     textBox.Leave += (sender, e) =>
                     {

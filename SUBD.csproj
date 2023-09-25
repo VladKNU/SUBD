@@ -85,7 +85,7 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="IntColumn.cs" />
-    <Compile Include="IntIntervalColumn.cs" />
+    <Compile Include="StringIntervalColumn.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RealColumn.cs" />
@@ -104,13 +104,13 @@
     <Compile Include="TableControlForm.Designer.cs">
       <DependentUpon>TableControlForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TableDiffControlForm.cs">
+    <Compile Include="TableCrossingControlForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="TableDiffControlForm.Designer.cs">
-      <DependentUpon>TableDiffControlForm.cs</DependentUpon>
+    <Compile Include="TableCrossingControlForm.Designer.cs">
+      <DependentUpon>TableCrossingControlForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="TextFileColumn.cs" />
+    <Compile Include="HtmlFileColumn.cs" />
     <EmbeddedResource Include="ColumnControlForm.resx">
       <DependentUpon>ColumnControlForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,8 +135,8 @@
     <EmbeddedResource Include="TableControlForm.resx">
       <DependentUpon>TableControlForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="TableDiffControlForm.resx">
-      <DependentUpon>TableDiffControlForm.cs</DependentUpon>
+    <EmbeddedResource Include="TableCrossingControlForm.resx">
+      <DependentUpon>TableCrossingControlForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
