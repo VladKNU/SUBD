@@ -43,11 +43,11 @@
             this.rowToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.CreateROW = new System.Windows.Forms.ToolStripMenuItem();
             this.DeleteROW = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableDifferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TableTabControl = new System.Windows.Forms.TabControl();
             this.OpenDatabaseDialog = new System.Windows.Forms.OpenFileDialog();
             this.SaveDatabaseDialog = new System.Windows.Forms.SaveFileDialog();
             this.DatabaseNameLabel = new System.Windows.Forms.Label();
-            this.tableDifferenceToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -59,7 +59,7 @@
             this.tableDifferenceToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(816, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(937, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -174,12 +174,19 @@
             this.DeleteROW.Text = "Delete";
             this.DeleteROW.Click += new System.EventHandler(this.DeleteROW_Click);
             // 
+            // tableDifferenceToolStripMenuItem
+            // 
+            this.tableDifferenceToolStripMenuItem.Name = "tableDifferenceToolStripMenuItem";
+            this.tableDifferenceToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
+            this.tableDifferenceToolStripMenuItem.Text = "TableDifference";
+            this.tableDifferenceToolStripMenuItem.Click += new System.EventHandler(this.tableDifferenceToolStripMenuItem_Click);
+            // 
             // TableTabControl
             // 
             this.TableTabControl.Location = new System.Drawing.Point(12, 51);
             this.TableTabControl.Name = "TableTabControl";
             this.TableTabControl.SelectedIndex = 0;
-            this.TableTabControl.Size = new System.Drawing.Size(793, 375);
+            this.TableTabControl.Size = new System.Drawing.Size(909, 375);
             this.TableTabControl.TabIndex = 0;
             // 
             // OpenDatabaseDialog
@@ -194,18 +201,11 @@
             this.DatabaseNameLabel.Size = new System.Drawing.Size(0, 16);
             this.DatabaseNameLabel.TabIndex = 1;
             // 
-            // tableDifferenceToolStripMenuItem
-            // 
-            this.tableDifferenceToolStripMenuItem.Name = "tableDifferenceToolStripMenuItem";
-            this.tableDifferenceToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
-            this.tableDifferenceToolStripMenuItem.Text = "TableDifference";
-            this.tableDifferenceToolStripMenuItem.Click += new System.EventHandler(this.tableDifferenceToolStripMenuItem_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(816, 438);
+            this.ClientSize = new System.Drawing.Size(937, 438);
             this.Controls.Add(this.DatabaseNameLabel);
             this.Controls.Add(this.TableTabControl);
             this.Controls.Add(this.menuStrip1);

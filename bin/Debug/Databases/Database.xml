@@ -1,0 +1,45 @@
+<DATABASE Name="Database">
+  <TABLES>
+    <Table Name="Table_1">
+      <COLUMNS>
+        <Column Name="C1" Type="INT" />
+        <Column Name="C2" Type="REAL" />
+        <Column Name="C3" Type="CHAR" />
+        <Column Name="C4" Type="STRING" />
+        <Column Name="C5" Type="TEXT FILE" />
+        <Column Name="C6" Type="INT INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="123#123,4#a#asd#D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\New Text Document.txt#2, 5#" />
+        <Row Data="1#2#3#4#null#3, 5#" />
+      </ROWS>
+    </Table>
+    <Table Name="Table_2">
+      <COLUMNS>
+        <Column Name="C1" Type="INT" />
+        <Column Name="C2" Type="REAL" />
+        <Column Name="C3" Type="CHAR" />
+        <Column Name="C4" Type="STRING" />
+        <Column Name="C5" Type="TEXT FILE" />
+        <Column Name="C6" Type="INT INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="123#123,4#a#asd#D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\New Text Document.txt#2, 5#" />
+        <Row Data="123#123#1#123#null#1, 4#" />
+      </ROWS>
+    </Table>
+    <Table Name="Table_1/Table_2">
+      <COLUMNS>
+        <Column Name="C1" Type="INT" />
+        <Column Name="C2" Type="REAL" />
+        <Column Name="C3" Type="CHAR" />
+        <Column Name="C4" Type="STRING" />
+        <Column Name="C5" Type="TEXT FILE" />
+        <Column Name="C6" Type="INT INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="1#2#3#4#null#3, 5#null#" />
+      </ROWS>
+    </Table>
+  </TABLES>
+</DATABASE>
