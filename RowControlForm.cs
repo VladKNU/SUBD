@@ -124,25 +124,21 @@ namespace SUBD
                 textBox.Text = "";                
                 textBox.Location = new Point(0, 32 + i * 60); // Adjust the TextBox position as needed               
 
-                if (dataList[i].Type == "HTML FILE")
+                if (dataList[i].Type == "TIME")
                 {
                     textBox.ReadOnly = true;
 
-                    Button openFileButton = new Button();
-                    openFileButton.Size = new Size(panel1.Width - 20, 23); // Adjust the button size as needed
-                    openFileButton.Text = "Open File";
-                    openFileButton.Location = new Point(0, 52 + i * 60); // Adjust the button position as needed
-                    openFileButton.Click += (sender, e) =>
+                    DateTimePicker timePicker = new DateTimePicker();
+                    timePicker.Format = DateTimePickerFormat.Time;
+                    timePicker.ShowUpDown = true;
+                    timePicker.Location = new Point(0, 52 + i * 60);
+                    timePicker.Size = new Size(panel1.Width - 20, 23);
+                    timePicker.ValueChanged += (sender, e) =>
                     {
-                        OpenFileDialog openFileDialog = new OpenFileDialog();
-                        openFileDialog.Filter = "Html Files (*.html)|*.html";
-                        if (openFileDialog.ShowDialog() == DialogResult.OK)
-                        {
-                            textBox.Text = openFileDialog.FileName;
-                        }
+                        textBox.Text = timePicker.Value.ToLongTimeString();
                     };
 
-                    panel1.Controls.Add(openFileButton); // Add the button to the Panel
+                    panel1.Controls.Add(timePicker);
                 }
 
                 if (dataList[i].Type == "STRING INTERVAL")

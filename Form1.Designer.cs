@@ -178,7 +178,7 @@
             // 
             this.tableDifferenceToolStripMenuItem.Name = "tableDifferenceToolStripMenuItem";
             this.tableDifferenceToolStripMenuItem.Size = new System.Drawing.Size(127, 24);
-            this.tableDifferenceToolStripMenuItem.Text = "TableCrossing";
+            this.tableDifferenceToolStripMenuItem.Text = "TableConcatenation";
             this.tableDifferenceToolStripMenuItem.Click += new System.EventHandler(this.tableDifferenceToolStripMenuItem_Click);
             // 
             // TableTabControl

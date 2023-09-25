@@ -26,10 +26,10 @@
       </ROWS>
     </Table>
     <Table Name="T1&amp;T2">
-      <COLUMNS>
-        <Column Name="C1" Type="HTML FILE" />
-      </COLUMNS>
+      <COLUMNS />
       <ROWS>
+        <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#null#" />
+        <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#null#" />
         <Row Data="D:\Subjects\Information Technology\SUBD\SUBD\bin\Debug\Databases\html.html#null#" />
       </ROWS>
     </Table>

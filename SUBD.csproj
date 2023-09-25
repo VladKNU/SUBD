@@ -110,7 +110,7 @@
     <Compile Include="TableCrossingControlForm.Designer.cs">
       <DependentUpon>TableCrossingControlForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="HtmlFileColumn.cs" />
+    <Compile Include="TimeColumn.cs" />
     <EmbeddedResource Include="ColumnControlForm.resx">
       <DependentUpon>ColumnControlForm.cs</DependentUpon>
     </EmbeddedResource>

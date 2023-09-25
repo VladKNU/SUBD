@@ -364,8 +364,8 @@ namespace SUBD
                 case "STRING":
                     ColumnsList.Add(new StringColumn(name));
                     break;
-                case "HTML FILE":
-                    ColumnsList.Add(new HtmlFileColumn(name));
+                case "TIME":
+                    ColumnsList.Add(new TimeColumn(name));
                     break;
                 case "STRING INTERVAL":
                     ColumnsList.Add(new StringIntervalColumn(name));
@@ -643,7 +643,7 @@ namespace SUBD
                     var rows1 = rows1Element.ChildNodes.Cast<XmlNode>().Select(node => node.Attributes["Data"].Value).ToList();
                     var rows2 = rows2Element.ChildNodes.Cast<XmlNode>().Select(node => node.Attributes["Data"].Value).ToList();
 
-                    List<Row> rows3 = rows1.Intersect(rows2).Select(rowData => new Row(rowData.Split('#').ToList())).ToList();
+                    List<Row> rows3 = rows1.Concat(rows2).Select(rowData => new Row(rowData.Split('#').ToList())).ToList();
 
                     if (rows3 != null && rows3.Count() > 0)
                     {

@@ -31,7 +31,7 @@ namespace SUBD
                 "REAL",
                 "CHAR",
                 "STRING",
-                "HTML FILE",
+                "TIME",
                 "STRING INTERVAL"
             };
 

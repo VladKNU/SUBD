@@ -1,0 +1,32 @@
+<DATABASE Name="DB">
+  <TABLES>
+    <Table Name="T1">
+      <COLUMNS>
+        <Column Name="C1" Type="TIME" />
+        <Column Name="C2" Type="STRING INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="12:07:57#2,3#" />
+      </ROWS>
+    </Table>
+    <Table Name="T2">
+      <COLUMNS>
+        <Column Name="C1" Type="TIME" />
+        <Column Name="C2" Type="STRING INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="11:28:20#2,4#" />
+      </ROWS>
+    </Table>
+    <Table Name="T1&amp;T2">
+      <COLUMNS>
+        <Column Name="C1" Type="TIME" />
+        <Column Name="C2" Type="STRING INTERVAL" />
+      </COLUMNS>
+      <ROWS>
+        <Row Data="12:07:57#2,3#null#" />
+        <Row Data="11:28:20#2,4#null#" />
+      </ROWS>
+    </Table>
+  </TABLES>
+</DATABASE>
